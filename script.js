@@ -11,6 +11,7 @@ function startGame() {
   if (gameRunning) return;
 
   gameRunning = true;
+  document.getElementById("time").textContent = "30"; // Reset timer display
   score = 0; // Reset score at the start of the game
   updateScoreDisplay(); // Update score display on screen
   countdown(); // Start the countdown timer
@@ -25,8 +26,15 @@ function endGame() {
   // Stop creating new drops
   clearInterval(dropMaker);
 
-  //reset the timer display
-  document.getElementById("time").textContent = "30";
+  console.log("Game has ended. Final score: " + score); // Debug log
+
+  // Display winning message
+  if(score >= 20){
+    alert("Congratulations! You won with a score of " + score + "!");
+  }
+  else{
+    alert("Game Over! Your final score is " + score + ". Try again to improve your score!");
+  }
 }
 
 function createDrop() {
