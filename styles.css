@@ -30,7 +30,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: "Avenir", "Proxima Nova", "Helvetica Neue", Arial, sans-serif;
 }
 
 .game-wrapper {
@@ -55,6 +55,7 @@ body {
     flex: 0 1 auto;
     font-size: 24px;
     font-weight: bold;
+    color: #159A48;           /* brand green */
 }
 
 #game-container {
@@ -67,11 +68,22 @@ body {
     overflow: hidden;
 }
 
+#game-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("img/cw_logo.png") no-repeat center;
+  background-size: 45%;
+  opacity: 0.08;            /* barely visible */
+  filter: grayscale(100%);
+  pointer-events: none;     /* non-interactive */
+  z-index: 0;               /* behind drops */
+}
 
 #start-btn {
     padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
+    background-color: #FFC907;   /* brand green */
+    color: black;           /* brand yellow */
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -79,13 +91,14 @@ body {
 }
 
 #start-btn:hover {
-    background-color: #45a049;
+    background-color: #e6f7ff;   /* subtle hover */
 }
 
 .score {
     flex: 0 1 auto;  /* Don't grow, can shrink, auto basis */
     font-size: 24px;
     font-weight: bold;
+    color: #159A48;           /* brand green */
 }
 
 .water-drop {
@@ -100,6 +113,7 @@ body {
     padding: 15px;  /* Add padding for larger click area */
     margin: -15px;  /* Offset padding to maintain visual size */
     transition: transform 0.1s ease;  /* Smooth hover effect */
+    z-index: 1;
 }
 
 .water-drop:hover {
@@ -124,6 +138,9 @@ body {
     margin-bottom: 20px;
     text-align: center;
 }
+.hidden {
+    display: none;
+}
 
 @keyframes dropFall {
     from {
@@ -142,4 +159,50 @@ body {
     #game-container {
         height: 70vh;
     }
+}
+
+#gameOverMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 1000;
+  min-width: 300px;
+}
+
+#gameOverMessage h2 {
+  margin-top: 0;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#gameOverMessage p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+#restart-btn {
+  padding: 10px 30px;
+  font-size: 1.1em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#restart-btn:hover {
+  background-color: #45a049;
+}
+
+.confetti-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2001; /* above #gameOverMessage (z-index: 1000) */
 }
